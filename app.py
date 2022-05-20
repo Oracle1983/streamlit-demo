@@ -4,6 +4,7 @@ import json
 import streamlit as st
 
 from PIL import Image
+import torch
 from torchvision import models, transforms
 
 def get_prediction(image, model, imagenet_class_index):
@@ -35,7 +36,8 @@ def transform_image(image):
 @st.cache
 def load_model():
     # Make sure to pass `pretrained` as `True` to use the pretrained weights:
-    model = models.resnet18(pretrained=True)
+    model = models.resnet18()
+    model.load_state_dict(torch.load('./model/resnet_weights.pth'))
     # Since we are using our model only for inference, switch to `eval` mode:
     model.eval()
 
