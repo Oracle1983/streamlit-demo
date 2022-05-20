@@ -54,14 +54,16 @@ def main():
 
     model, imagenet_class_index = load_model()
 
-    image_file  = st.file_uploader("Upload an image to get a prediction", type=['jpg', 'jpeg', 'png'])
+    image_file  = st.file_uploader("Upload an image", type=['jpg', 'jpeg', 'png'])
 
     if image_file:
 
         left_column, right_column = st.columns(2)
         left_column.image(image_file, caption="Uploaded image", use_column_width=True)
         image = Image.open(image_file)
+        predict_button = st.button("Predict")
 
+    if predict_button:
         prediction = get_prediction(image, model, imagenet_class_index)
         right_column.title("Prediction")
         right_column.write(prediction)
