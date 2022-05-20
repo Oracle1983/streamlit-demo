@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resnet-service
+  namespace: resnet
+spec:
+  ports:
+    - name: 80-tcp
+      port: 80
+      protocol: TCP
+      targetPort: 8501
+  selector:
+    app : resnet
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app : resnet
+  name: resnet-deployment
+  namespace: resnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resnet
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: resnet
+    spec:
+      containers:
+        - image: oracle83/resnet-demo:latest
+          name: resnet-container
+          ports:
+            - containerPort: 8501
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always

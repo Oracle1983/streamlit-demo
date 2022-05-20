@@ -48,7 +48,7 @@ def load_model():
 
 def main():
 
-    st.title("Predict objects in an image")
+    st.title("Predict objects in an image (on local k8s cluster)")
     st.write("This application knows the objects in an image , but works best when only one object is in the image")
 
 
