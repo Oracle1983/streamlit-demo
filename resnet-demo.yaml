@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: resnet-service
   namespace: resnet
+  labels:
+    app: resnet
 spec:
   ports:
     - name: 80-tcp
@@ -27,14 +29,17 @@ spec:
     matchLabels:
       app: resnet
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: resnet
     spec:
       containers:
-        - image: oracle83/resnet-demo:latest
+        - image: oracle83/resnet-demo:v4
           name: resnet-container
           ports:
             - containerPort: 8501
