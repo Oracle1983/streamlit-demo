@@ -24,7 +24,7 @@ metadata:
   name: resnet-deployment
   namespace: resnet
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: resnet
@@ -39,7 +39,7 @@ spec:
         app: resnet
     spec:
       containers:
-        - image: oracle83/resnet-demo:v4
+        - image: oracle83/resnet-demo:v5
           name: resnet-container
           ports:
             - containerPort: 8501
