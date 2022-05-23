@@ -37,18 +37,18 @@ def transform_image(image):
 def load_model():
     # Make sure to pass `pretrained` as `True` to use the pretrained weights:
     model = models.resnet18()
-    model.load_state_dict(torch.load('./model/resnet_weights.pth'))
+    model.load_state_dict(torch.load(f"{os.getcwd()}/model/resnet_weights.pth"))
     # Since we are using our model only for inference, switch to `eval` mode:
     model.eval()
 
-    imagenet_class_index = json.load(open(f"{os.getcwd()}/data/imagenet_class_index.json"))
+    imagenet_class_index = json.load(open(f"{os.getcwd()}/model/imagenet_class_index.json"))
 
     return model, imagenet_class_index
 
 
 def main():
 
-    st.title("Predict objects in an image (v4)")
+    st.title("Predict objects in an image (v5)")
     st.write("This application knows the objects in an image , but works best when only one object is in the image")
 
 
