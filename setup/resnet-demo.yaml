@@ -46,4 +46,14 @@ spec:
               protocol: TCP
           resources: {}
           imagePullPolicy: IfNotPresent
+          readinessProbe:
+            tcpSocket:
+              port: 8501
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8501
+            initialDelaySeconds: 15
+            periodSeconds: 20
       restartPolicy: Always
